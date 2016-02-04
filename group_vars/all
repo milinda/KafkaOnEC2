@@ -1,0 +1,19 @@
+# ---------------------------
+# EC2
+# ---------------------------
+ec2:
+  key: samzasql-eval-oregon-new
+  zookeeper_instance_type: m3.large
+  kafka_instance_type: r3.2xlarge
+  image: ami-9abea4fb
+  region: us-west-2
+  kafka_security_group: kafka
+  zookeeper_security_group: zookeeper
+  kafka_instance_count: 1
+  zookeeper_instance_count: 1
+
+# ---------------------------
+# SSH
+# ---------------------------
+ssh_known_hosts_command: "ssh-keyscan -H -T 10"
+ssh_known_hosts_file: "/Users/mpathira/.ssh/known_hosts"

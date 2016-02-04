@@ -1,0 +1,7 @@
+---
+  - name: List all volumes
+    command: df -h
+    register: volumes
+
+  - name: Print volumes
+    debug: var=volumes
