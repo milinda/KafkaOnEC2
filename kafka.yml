@@ -1,50 +1,6 @@
 ---
 # This playbook would deploy a Kafka cluster (with Zookeeper) on EC2 (Ubuntu instances)
 
-- name: Create EC2 instances for Zookeeper
-  hosts: localhost
-  connection: local
-  gather_facts: no
-  tasks:
-    - name: Launch instances
-      ec2:
-        key_name: "{{ ec2.key }}"
-        group: "{{ ec2.zookeeper_security_group }}"
-        instance_type: "{{ ec2.zookeeper_instance_type }}"
-        image: "{{ ec2.image }}"
-        wait: yes
-        region: "{{ ec2.region }}"
-        count: "{{ ec2.zookeeper_instance_count }}"
-        spot_price: 0.2
-        spot_wait_timeout: 600
-      register: zookeeperinstances
-    - name: Add new instances to a host group
-      add_host: name={{ item.public_dns_name }} groups=zookeepernodes
-      with_items: zookeeperinstances.instances
-    - name: Wait for SSH to come up
-      wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=360 state=started
-      with_items: zookeeperinstances.instances
-    - name: Make sure the known hosts file exists
-      file: "path={{ ssh_known_hosts_file }} state=touch"
-    - name: Check host name availability
-      shell: "ssh-keygen -f {{ ssh_known_hosts_file }} -F {{ item.public_dns_name }}"
-      with_items: zookeeperinstances.instances
-      register: z_ssh_known_host_results
-      ignore_errors: yes
-    - name: Scan the public key
-      shell: "{{ ssh_known_hosts_command}} {{ item.item.public_dns_name }} >> {{ ssh_known_hosts_file }}"
-      with_items: z_ssh_known_host_results.results
-      when: item.stdout == ""
-
-- name: Configure Zookeeper instances
-  hosts: zookeepernodes
-  remote_user: ubuntu
-  become: yes
-  become_method: sudo
-  gather_facts: yes
-  roles:
-    - bootstrap
-
 - name: Create EC2 instances for Kafka brokers
   hosts: localhost
   gather_facts: no
@@ -93,6 +49,8 @@
   become_method: sudo
   gather_facts: yes
   roles:
-    - bootstrap
+    - makefs
+    - jdk
+    - collectd
 
 # TODO: Move the vars to global vars. Upgrade Kafka to 0.9.x and Zookeeper to a compatible version.

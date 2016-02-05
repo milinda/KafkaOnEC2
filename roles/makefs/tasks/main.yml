@@ -1,0 +1,10 @@
+---
+  - name: Make ext4 filesystem on EBS volume
+    command: mkfs -t ext4 /dev/xvdb
+
+  - name: Create mount point
+    command: mkdir /mnt
+    ignore_errors: yes
+
+  - name: Mount EBS volume at /mnt
+    command: mount /dev/xvdb /mnt

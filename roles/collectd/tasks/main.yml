@@ -1,0 +1,12 @@
+---
+# Install and configure collectd
+- name: Update apt cache and install collectd
+  apt: name=collectd update_cache=yes
+- name: Install collectd-utils
+  apt: name=collectd-utils state=present
+- name: Configure collectd
+  template: src={{ item }} dest=/etc/collectd/collectd.conf.d/{{ item }}
+  with_items:
+    - influxdb.conf
+- name: Start collectd
+  service: name=collectd state=restarted

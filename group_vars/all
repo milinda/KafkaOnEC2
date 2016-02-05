@@ -4,7 +4,7 @@
 ec2:
   key: samzasql-eval-oregon-new
   zookeeper_instance_type: m3.large
-  kafka_instance_type: r3.2xlarge
+  kafka_instance_type: r3.large
   image: ami-9abea4fb
   region: us-west-2
   kafka_security_group: kafka
@@ -17,3 +17,16 @@ ec2:
 # ---------------------------
 ssh_known_hosts_command: "ssh-keyscan -H -T 10"
 ssh_known_hosts_file: "/Users/mpathira/.ssh/known_hosts"
+
+# ---------------------------
+# Monitoring
+# ---------------------------
+influxdb_host: mugo.cs.indiana.edu
+
+#----------------------------
+#  JAVA Variables
+#----------------------------
+java_home: /usr/local/java/jdk
+jdk_archive_url: https://mugo.cs.indiana.edu/jdk-8u72-linux-x64.tar.gz
+jdk_archive_filename: jdk-8u72-linux-x64.tar.gz
+jdk_version: jdk1.8.0_72
