@@ -2,6 +2,6 @@
 
   # Initializing `myid` File for Zookeeper.
   - name: Initializing `myid` File for Zookeeper.
-    command: creates={{ zookeeper_data_store }}/myid {{ common['soft_link_base_path'] }}/zookeeper/bin/zkServer-initialize.sh --myid={{ zookeeper_id }}
+    command: creates={{ zookeeper.data_store }}/myid {{ common.soft_link_base_path }}/zookeeper/bin/zkServer-initialize.sh --myid={{ zid }}
     sudo: yes
     sudo_user: "{{ zookeeper_user }}"

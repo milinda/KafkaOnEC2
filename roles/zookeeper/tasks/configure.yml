@@ -4,16 +4,16 @@
 
   # Updating Configuration File in Zookeeper.
   - name: Updating Configuration File in Zookeeper.
-    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/zookeeper/conf/{{ item }}  owner={{ zookeeper_user }} group={{ zookeeper_group }}
+    template: src={{ item }} dest={{ common.soft_link_base_path }}/zookeeper/conf/{{ item }}  owner={{ zookeeper.user }} group={{ zookeeper.group }}
     with_items:
       - zoo.cfg
       - log4j.properties
 
   # Creating a directory for Zookeeper.
   - name: Creating a directory for Zookeeper.
-    file: path={{ item }} owner={{ zookeeper_user }} group={{ zookeeper_group }} state=directory
+    file: path={{ item }} owner={{ zookeeper.user }} group={{ zookeeper.group }} state=directory
     with_items:
-      - "{{ zookeeper_data_store }}"
-      - "{{ zookeeper_logging }}"
+      - "{{ zookeeper.data_store }}"
+      - "{{ zookeeper.logging }}"
 #    notify:
 #      - Restart Zookeeper.

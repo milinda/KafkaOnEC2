@@ -18,8 +18,8 @@
         spot_wait_timeout: 600
       register: zookeeperinstances
     - name: Add new instances to a host group
-      add_host: name={{ item.public_dns_name }} groups=zookeepernodes
-      with_items: zookeeperinstances.instances
+      add_host: name={{ item.1.public_dns_name }} groups=zookeepernodes zid={{ item.0 + 1 }} private_ip={{ item.1.private_ip }}
+      with_indexed_items: zookeeperinstances.instances
     - name: Wait for SSH to come up
       wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=360 state=started
       with_items: zookeeperinstances.instances
