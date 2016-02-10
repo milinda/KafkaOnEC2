@@ -1,7 +1,9 @@
 ---
+- name: Create `myid` file
+  file: path={{ zookeeper.data_store }}/myid state=touch mode="u=rw,g=r,o=r"  owner="{{ zookeeper.user }}" group="{{ zookeeper.group }}"
 
-  # Initializing `myid` File for Zookeeper.
-  - name: Initializing `myid` File for Zookeeper.
-    command: creates={{ zookeeper.data_store }}/myid {{ common.soft_link_base_path }}/zookeeper/bin/zkServer-initialize.sh --myid={{ zid }}
-    sudo: yes
-    sudo_user: "{{ zookeeper_user }}"
+- name: Initializing `myid` File for Zookeeper.
+  lineinfile: dest={{ zookeeper.data_store }}/myid line="{{ zid }}"
+  become: yes
+  become_user: "{{ zookeeper.user }}"
+  become_method: sudo

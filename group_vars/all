@@ -2,7 +2,7 @@
 # EC2
 # ---------------------------
 ec2:
-  key: samzasql-eval-oregon-new
+  key: milinda-ec2
   zookeeper_instance_type: m3.large
   kafka_instance_type: r3.large
   image: ami-9abea4fb
@@ -27,9 +27,9 @@ influxdb_host: mugo.cs.indiana.edu
 #  JAVA
 #----------------------------
 java_home: /usr/local/java/jdk
-jdk_archive_url: https://mugo.cs.indiana.edu/jdk-8u72-linux-x64.tar.gz
-jdk_archive_filename: jdk-8u72-linux-x64.tar.gz
-jdk_version: jdk1.8.0_72
+jdk_archive_url: http://mugo.cs.indiana.edu/jdk-8u73-linux-x64.tar
+jdk_archive_filename: jdk-8u73-linux-x64.tar
+jdk_version: jdk1.8.0_73
 
 # --------------------------------------
 # Common
@@ -63,3 +63,5 @@ kafka:
   user: kafkaadmin
   group: kafkaadmin
   password: $6$rounds=40000$1qjG/hovLZOkcerH$CK4Or3w8rR3KabccowciZZUeD.nIwR/VINUa2uPsmGK/2xnmOt80TjDwbof9rNvnYY6icCkdAR2qrFquirBtT1
+  replication_factor: 1
+  partition_count: 8

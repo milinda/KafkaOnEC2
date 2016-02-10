@@ -3,7 +3,7 @@
     command: mkfs -t ext4 /dev/xvdb
 
   - name: Create mount point
-    command: mkdir /mnt
+    file: path=/mnt state=directory
     ignore_errors: yes
 
   - name: Mount EBS volume at /mnt
