@@ -1,13 +1,13 @@
 ---
   # Download Zookeeper
   - name: Download Kafka
-    get_url: url=http://mugo.cs.indiana.edu/{{ kafka.version }}.tar dest=/mnt/{{ kafka.version }}.tar mode=0644 validate_certs=no
+    get_url: url=http://www-us.apache.org/dist/kafka/{{ kafka.version }}/kafka_2.11-{{ kafka.version }}.tgz dest=/mnt/kafka_2.11-{{ kafka.version }}.tgz mode=0644 validate_certs=no
 
   - name: Copy and UnArchive the Package in Destination Server.
-    unarchive: creates={{ common.install_base_path }}/{{ kafka.version }} copy=no src=/mnt/{{ kafka.version }}.tar dest={{ common.install_base_path }} owner={{ kafka.user }} group={{ kafka.group }}
+    unarchive: creates={{ common.install_base_path }}/kafka_2.11-{{ kafka.version }} copy=no src=/mnt/kafka_2.11-{{ kafka.version }}.tgz dest={{ common.install_base_path }} owner={{ kafka.user }} group={{ kafka.group }}
 
   - name: Change Directory Permissions.
-    file: path={{ common.install_base_path }}/{{ kafka.version }} owner={{ kafka.user }} group={{ kafka.group }} recurse=yes
+    file: path={{ common.install_base_path }}/kafka_2.11-{{ kafka.version }} owner={{ kafka.user }} group={{ kafka.group }} recurse=yes
 
   - name: Creating a Symbolic Link in {{ common['install_base_path'] }}/kafka.
-    file: src={{ common.install_base_path }}/{{ kafka.version }} path={{ common.soft_link_base_path }}/kafka state=link owner={{ kafka.user }} group={{ kafka.group }}
+    file: src={{ common.install_base_path }}/kafka_2.11-{{ kafka.version }} path={{ common.soft_link_base_path }}/kafka state=link owner={{ kafka.user }} group={{ kafka.group }}

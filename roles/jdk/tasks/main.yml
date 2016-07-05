@@ -13,10 +13,10 @@
   file: path=/usr/local/java state=directory
 
 - name: Download JDK
-  get_url: url={{ jdk_archive_url }} dest=/mnt/{{ jdk_archive_filename }} mode=0644 validate_certs=no
+  get_url: url={{ jdk_archive_url }} dest=/mnt/{{ jdk_archive_filename }} mode=0644 validate_certs=no headers='Cookie:oraclelicense=accept-securebackup-cookie'
 
 - name: JDK | Oracle JDK | Unpack the compressed JDK binaries
-  command: tar -xvf /mnt/{{ jdk_archive_filename }} chdir=/usr/local/java creates=/usr/local/java/{{ jdk_version }}
+  command: tar -xzf /mnt/{{ jdk_archive_filename }} chdir=/usr/local/java creates=/usr/local/java/{{ jdk_version }}
 
 - name: JDK | Oracle JDK | Update the symbolic link to the JDK install
   file: path={{ java_home }} src=/usr/local/java/{{ jdk_version }} state=link force=yes

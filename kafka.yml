@@ -1,6 +1,4 @@
 ---
-# This playbook would deploy a Kafka cluster (with Zookeeper) on EC2 (Ubuntu instances)
-
 - name: Create EC2 instances for Zookeeper
   hosts: localhost
   connection: local
@@ -15,20 +13,20 @@
         wait: yes
         region: "{{ ec2.region }}"
         count: "{{ ec2.zookeeper_instance_count }}"
-        spot_price: 0.2
+        spot_price: "{{ ec2.zk_spot_price }}"
         spot_wait_timeout: 600
       register: zookeeperinstances
     - name: Add new instances to a host group
       add_host: name={{ item.1.public_dns_name }} groups=zookeepernodes zid={{ item.0 + 1 }} private_ip={{ item.1.private_ip }}
-      with_indexed_items: zookeeperinstances.instances
+      with_indexed_items: "{{ zookeeperinstances.instances }}"
     - name: Wait for SSH to come up
       wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=360 state=started
-      with_items: zookeeperinstances.instances
+      with_items: "{{ zookeeperinstances.instances }}"
     - name: Make sure the known hosts file exists
       file: "path={{ ssh_known_hosts_file }} state=touch"
     - name: Check host name availability
       shell: "ssh-keygen -f {{ ssh_known_hosts_file }} -F {{ item.public_dns_name }}"
-      with_items: zookeeperinstances.instances
+      with_items: "{{ zookeeperinstances.instances }}"
       register: z_ssh_known_host_results
       ignore_errors: yes
     - name: Scan the public key
@@ -44,11 +42,11 @@
   gather_facts: yes
   roles:
     - jdk
-    - collectd
     - zookeeper
 
 - name: Create EC2 instances for Kafka brokers
   hosts: localhost
+  connection: local
   gather_facts: no
   tasks:
     - name: Launch instances
@@ -60,7 +58,7 @@
         wait: yes
         region: "{{ ec2.region }}"
         count: "{{ ec2.kafka_instance_count }}"
-        spot_price: 0.8
+        spot_price: "{{ ec2.kafka_spot_price }}"
         spot_wait_timeout: 600
         monitoring: yes
         volumes:
@@ -72,15 +70,15 @@
       register: kafkainstances
     - name: Add new instances to a host group
       add_host: name={{ item.1.public_dns_name }} groups=kafkanodes broker_id={{ item.0 + 1 }}
-      with_indexed_items: kafkainstances.instances
+      with_indexed_items: "{{ kafkainstances.instances }}"
     - name: Wait for SSH to come up
       wait_for: host={{ item.public_dns_name }} port=22 delay=60 timeout=360 state=started
-      with_items: kafkainstances.instances
+      with_items: "{{ kafkainstances.instances }}"
     - name: Make sure the known hosts file exists
       file: "path={{ ssh_known_hosts_file }} state=touch"
     - name: Check host name availability
       shell: "ssh-keygen -f {{ ssh_known_hosts_file }} -F {{ item.public_dns_name }}"
-      with_items: kafkainstances.instances
+      with_items: "{{ kafkainstances.instances }}"
       register: k_ssh_known_host_results
       ignore_errors: yes
     - name: Scan the public key
@@ -97,7 +95,6 @@
   roles:
     - makefs
     - jdk
-    - collectd
     - kafka
 
 # TODO: Move the vars to global vars. Upgrade Kafka to 0.9.x and Zookeeper to a compatible version.

@@ -2,7 +2,7 @@
 # EC2
 # ---------------------------
 ec2:
-  key: milinda-ec2
+  key: 2016july-ec2-keypair
   zookeeper_instance_type: m3.large
   kafka_instance_type: r3.large
   image: ami-9abea4fb
@@ -11,6 +11,8 @@ ec2:
   zookeeper_security_group: zookeeper
   kafka_instance_count: 1
   zookeeper_instance_count: 1
+  zk_spot_price: 0.2
+  kafka_spot_price: 0.8
 
 # ---------------------------
 # SSH
@@ -27,9 +29,9 @@ influxdb_host: mugo.cs.indiana.edu
 #  JAVA
 #----------------------------
 java_home: /usr/local/java/jdk
-jdk_archive_url: http://mugo.cs.indiana.edu/jdk-8u73-linux-x64.tar
-jdk_archive_filename: jdk-8u73-linux-x64.tar
-jdk_version: jdk1.8.0_73
+jdk_archive_url: http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jdk-8u92-linux-x64.tar.gz
+jdk_archive_filename: jdk-8u92-linux-x64.tar.gz
+jdk_version: jdk1.8.0_92
 
 # --------------------------------------
 # Common
@@ -59,7 +61,7 @@ kafka:
   data_store: /mnt/data/kafka
   log4j_rootlogger: INFO
   topics: [ A, B, C, D ]
-  version: kafka_2.11-0.9.0.0
+  version: 0.9.0.1
   user: kafkaadmin
   group: kafkaadmin
   password: $6$rounds=40000$1qjG/hovLZOkcerH$CK4Or3w8rR3KabccowciZZUeD.nIwR/VINUa2uPsmGK/2xnmOt80TjDwbof9rNvnYY6icCkdAR2qrFquirBtT1
