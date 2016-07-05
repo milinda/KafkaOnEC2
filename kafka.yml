@@ -31,7 +31,7 @@
       ignore_errors: yes
     - name: Scan the public key
       shell: "{{ ssh_known_hosts_command}} {{ item.item.public_dns_name }} >> {{ ssh_known_hosts_file }}"
-      with_items: z_ssh_known_host_results.results
+      with_items: "{{ z_ssh_known_host_results.results }}"
       when: item.stdout == ""
 
 - name: Configure Zookeeper instances
@@ -83,7 +83,7 @@
       ignore_errors: yes
     - name: Scan the public key
       shell: "{{ ssh_known_hosts_command}} {{ item.item.public_dns_name }} >> {{ ssh_known_hosts_file }}"
-      with_items: k_ssh_known_host_results.results
+      with_items: "{{ k_ssh_known_host_results.results }}"
       when: item.stdout == ""
 
 - name: Configure Kafka instances
