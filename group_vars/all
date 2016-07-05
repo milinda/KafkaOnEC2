@@ -46,7 +46,7 @@ common:
 #  Zookeeper
 #----------------------------
 zookeeper:
-  version: zookeeper-3.4.6
+  version: 3.4.6
   user: zkadmin
   group: zkadmin
   password: $6$rounds=40000$1qjG/hovLZOkcerH$CK4Or3w8rR3KabccowciZZUeD.nIwR/VINUa2uPsmGK/2xnmOt80TjDwbof9rNvnYY6icCkdAR2qrFquirBtT1
