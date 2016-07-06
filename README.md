@@ -1,6 +1,6 @@
-# Kafka on EC2 (WIP)
+# Kafka on EC2
 
-Ansible scripts for deploying Kafka (v0.9.1 with Zookeeper 3.4.6) on EC2.
+Ansible scripts for deploying Kafka (v0.9.1 with Zookeeper 3.4.6) on EC2. These scripts were developed based on various resources from Internet (*I can't remeber the exact resources I used since the initial development was done couple of months ago.*). 
 
 # How To Run
 
@@ -10,12 +10,7 @@ Ansible scripts for deploying Kafka (v0.9.1 with Zookeeper 3.4.6) on EC2.
 * **boto** - required for Ansible EC2 module
 * Setup boto configuration based on [http://boto.readthedocs.org/en/latest/boto_config_tut.html](http://boto.readthedocs.org/en/latest/boto_config_tut.html)
 * Access to EC2 Key Pair
-* If you are on Mac OS X, please make sure to put following to your [ansible.cfg](http://docs.ansible.com/ansible/intro_configuration.html)
 
-```
-[ssh_connection]
-control_path = %(directory)s/%%h-%%p-%%r
-```
 
 ## Steps
 
