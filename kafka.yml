@@ -97,4 +97,3 @@
     - jdk
     - kafka
 
-# TODO: Move the vars to global vars. Upgrade Kafka to 0.9.x and Zookeeper to a compatible version.
