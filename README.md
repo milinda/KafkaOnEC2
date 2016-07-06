@@ -19,4 +19,4 @@ Ansible scripts for deploying Kafka (v0.9.1 with Zookeeper 3.4.6) on EC2. These 
 
 # Notes
 
-* In one of my Macs I got the error described in [https://github.com/ansible/ansible/issues/5734](https://github.com/ansible/ansible/issues/5734). If you are getting the same error please use the ```inventory``` file provided.
+* In one of my Macs I got the error described in [https://github.com/ansible/ansible/issues/5734](https://github.com/ansible/ansible/issues/5734). If you are getting the same error please use the ```inventory``` file provided (```ansible-playbook --private-key=<AWS_key_file> -u ubuntu -i inventory kafka.yml```).
