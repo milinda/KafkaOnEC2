@@ -1,8 +1,4 @@
 ---
-
-  # Starting Zookeeper Service.
-  - name: Starting Zookeeper Server.
-    command: chdir={{ zookeeper.logging }} bash {{ common.soft_link_base_path }}/zookeeper/bin/zkServer.sh start
-    become: yes
-    become_method: sudo
-    become_user: "{{ zookeeper.user }}"
+# Starting Zookeeper Service.
+- name: Starting Zookeeper Server.
+  command: chdir={{ zookeeper.logging }} bash {{ common.soft_link_base_path }}/zookeeper/bin/zkServer.sh start

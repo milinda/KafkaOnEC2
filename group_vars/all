@@ -2,14 +2,14 @@
 # EC2
 # ---------------------------
 ec2:
-  key: 2016july-ec2-keypair
-  zookeeper_instance_type: m3.large
+  key: macbookpro
+  zookeeper_instance_type: c4.large
   kafka_instance_type: r3.large
   image: ami-9abea4fb
   region: us-west-2
   kafka_security_group: kafka
   zookeeper_security_group: zookeeper
-  kafka_instance_count: 1
+  kafka_instance_count: 3
   zookeeper_instance_count: 1
   zk_spot_price: 0.5
   kafka_spot_price: 0.8

@@ -1,6 +1,7 @@
 ---
   - name: Creating data directory
-    file: path=/mnt/data state=directory
+    file: path=/mnt/data state=directory owner={{ kafka.user }} group={{ kafka.group }}
+
 
   - name: Updating Configuration File in kafka.
     template: src={{ item }} dest={{ common.soft_link_base_path }}/kafka/config/{{ item }} owner={{ kafka.user }} group={{ kafka.group }}

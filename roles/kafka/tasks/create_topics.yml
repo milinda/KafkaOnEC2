@@ -5,7 +5,5 @@
 
   - name: Creating Topics.
     command: bash "{{ common.soft_link_base_path }}"/kafka/bin/kafka-topics.sh --create --zookeeper "{% for host in groups['zookeepernodes'] %}{{ hostvars[host]['inventory_hostname'] }}:2181{% if not loop.last %},{% endif %}{% endfor %}"  --replication-factor {{ kafka.replication_factor }} --partitions {{ kafka.partition_count }} --topic {{ item }}
-    become: yes
-    become_user: "{{ kafka.user }}"
-    become_method: sudo
     with_items: "{{ kafka.topics }}"
+    when: broker_id == "1"

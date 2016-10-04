@@ -4,6 +4,3 @@
 
 - name: Initializing `myid` File for Zookeeper.
   lineinfile: dest={{ zookeeper.data_store }}/myid line="{{ zid }}"
-  become: yes
-  become_user: "{{ zookeeper.user }}"
-  become_method: sudo

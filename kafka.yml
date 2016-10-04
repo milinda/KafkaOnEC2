@@ -34,14 +34,22 @@
       with_items: "{{ z_ssh_known_host_results.results }}"
       when: item.stdout == ""
 
-- name: Configure Zookeeper instances
+- name: Install JDK on Zookeeper instances
   hosts: zookeepernodes
   remote_user: ubuntu
-  become: yes
+  become: true
   become_method: sudo
   gather_facts: yes
   roles:
     - jdk
+
+- name: Install and start Zookeeper
+  hosts: zookeepernodes
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+  gather_facts: yes
+  roles:
     - zookeeper
 
 - name: Create EC2 instances for Kafka brokers
@@ -86,14 +94,22 @@
       with_items: "{{ k_ssh_known_host_results.results }}"
       when: item.stdout == ""
 
-- name: Configure Kafka instances
+- name: Configure file system and install JDK on Kafka instances
   hosts: kafkanodes
   remote_user: ubuntu
-  become: yes
+  become: true
   become_method: sudo
   gather_facts: yes
   roles:
     - makefs
     - jdk
+
+- name: Install and start Kafka
+  hosts: kafkanodes
+  remote_user: ubuntu
+  become: true
+  become_method: sudo
+  gather_facts: yes
+  roles:
     - kafka
 

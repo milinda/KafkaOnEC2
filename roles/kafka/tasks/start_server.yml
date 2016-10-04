@@ -6,9 +6,6 @@
   - name: Starting kafka server on port 9091/9092.
     command: bash "{{ common.soft_link_base_path }}"/kafka/config/kafka_server_starter.sh
     register: output
-    become: yes
-    become_method: sudo
-    become_user: "{{ kafka.user }}"
 
   - name: Lets through some Debug.stdout Output.
     debug: msg="{{ output.stdout }}"

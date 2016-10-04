@@ -1,6 +1,6 @@
 ---
   - name: Creating data directory
-    file: path=/mnt/data state=directory
+    file: path=/mnt/data state=directory owner={{ zookeeper.user }} group={{ zookeeper.group }}
 
   # Updating Configuration File in Zookeeper.
   - name: Updating Configuration File in Zookeeper.
