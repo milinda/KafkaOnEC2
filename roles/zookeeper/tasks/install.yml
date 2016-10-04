@@ -1,7 +1,7 @@
 ---
   # Download Zookeeper
   - name: Download Zookeeper
-    get_url: url=http://www.motorlogy.com/apache/zookeeper/zookeeper-{{ zookeeper.version }}/zookeeper-{{ zookeeper.version }}.tar.gz dest=/mnt/zookeeper-{{ zookeeper.version }}.tar.gz mode=0644 validate_certs=no
+    get_url: url=https://www.apache.org/dist/zookeeper/zookeeper-{{ zookeeper.version }}/zookeeper-{{ zookeeper.version }}.tar.gz dest=/mnt/zookeeper-{{ zookeeper.version }}.tar.gz mode=0644 validate_certs=no
 
   # unarchive - Copy tgz file and extract in destination.
   - name: Copy and UnArchive the Package in Destination Server.
