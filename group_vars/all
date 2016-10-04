@@ -62,7 +62,7 @@ kafka:
   data_store: /mnt/data/kafka
   log4j_rootlogger: INFO
   topics: [ A, B, C, D ]
-  version: 0.9.0.1
+  version: 0.10.0.1
   user: kafkaadmin
   group: kafkaadmin
   password: $6$rounds=40000$1qjG/hovLZOkcerH$CK4Or3w8rR3KabccowciZZUeD.nIwR/VINUa2uPsmGK/2xnmOt80TjDwbof9rNvnYY6icCkdAR2qrFquirBtT1
