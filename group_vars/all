@@ -3,14 +3,14 @@
 # ---------------------------
 ec2:
   key: macbookpro
-  zookeeper_instance_type: c4.large
-  kafka_instance_type: r3.large
+  zookeeper_instance_type: m3.xlarge
+  kafka_instance_type: r3.2xlarge
   image: ami-9abea4fb
   region: us-west-2
   kafka_security_group: kafka
   zookeeper_security_group: zookeeper
   kafka_instance_count: 3
-  zookeeper_instance_count: 1
+  zookeeper_instance_count: 3
   zk_spot_price: 0.5
   kafka_spot_price: 0.8
 
