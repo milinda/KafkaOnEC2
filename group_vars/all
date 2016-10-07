@@ -3,7 +3,7 @@
 # ---------------------------
 ec2:
   key: macbookpro
-  zookeeper_instance_type: m3.xlarge
+  zookeeper_instance_type: c3.xlarge
   kafka_instance_type: r3.2xlarge
   image: ami-9abea4fb
   region: us-west-2
